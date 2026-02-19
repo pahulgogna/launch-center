@@ -8,8 +8,8 @@ type ItemStore interface {
 }
 
 type Item struct {
-	Name              string
-	Description       string
-	Url               string
-	ThumbnailLocation string
+	Name              string `json:"name"`
+	Description       string `json:"description"`
+	Url               string `json:"url"`
+	ThumbnailLocation string `json:"thumbnail"`
 }
