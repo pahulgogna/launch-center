@@ -5,6 +5,7 @@ import (
 
 	"github.com/pahulgogna/launch-center/cmd"
 	"github.com/pahulgogna/launch-center/storage"
+	"github.com/pahulgogna/launch-center/types"
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
 	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
@@ -13,7 +14,8 @@ import (
 var assets embed.FS
 
 func main() {
-	itemStore := storage.NewStore()
+
+	var itemStore types.ItemStore = storage.NewStore()
 	app := cmd.NewApp(itemStore)
 
 	err := wails.Run(&options.App{
@@ -23,12 +25,12 @@ func main() {
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
-		BackgroundColour: &options.RGBA{R: 27, G: 38, B: 54, A: 100},
+		BackgroundColour: &options.RGBA{R: 0, G: 0, B: 0, A: 0},
 		OnStartup:        app.Startup,
 		Bind: []interface{}{
 			app,
+			itemStore,
 		},
-		WindowStartState: options.Maximised,
 	})
 
 	if err != nil {

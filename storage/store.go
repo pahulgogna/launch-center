@@ -40,7 +40,7 @@ func NewStore() *Handler {
 	}
 }
 
-func (h *Handler) GetItems() (*[]types.Item, error) {
+func (h *Handler) GetItems() ([]types.Item, error) {
 
 	dirs, err := os.ReadDir(h.itemsDir)
 	if err != nil {
@@ -70,7 +70,7 @@ func (h *Handler) GetItems() (*[]types.Item, error) {
 		}
 	}
 
-	return &result, nil
+	return result, nil
 }
 
 func (h *Handler) SaveItem(item types.Item) error {
